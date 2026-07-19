@@ -1,5 +1,7 @@
 version: '3.8'
 
+name: oracle-nodejs-restful-apis
+
 services:
   oracle-database-service:
     image: container-registry.oracle.com/database/free:latest
