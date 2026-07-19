@@ -13,8 +13,9 @@ RUN npm install
 # Copy rest of the app
 COPY . .
 
-# Expose port
-EXPOSE 3000
+# Expose port (documentation only; actual binding is set in docker-compose.yml)
+ARG DEMASY_SERVER_PORT=3002
+EXPOSE ${DEMASY_SERVER_PORT}
 
 # Start the app
 CMD ["npm", "start"]
