@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
     connection = await oracledb.getConnection(dbConfig);
 
     const result = await connection.execute(
-      `SELECT TO_CHAR(SYSDATE, 'DD/MM/RRRR') AS today FROM dual`
+      `SELECT TO_CHAR(SYSDATE, 'DD/MM/RRRR HH24:MI:SS') AS today FROM dual`
     );
 
     const today = result.rows[0][0];
@@ -37,5 +37,5 @@ app.get('/', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.DEMASY_SERVER_PORT;
 app.listen(PORT, () => console.log(`App running on http://localhost:${PORT}`));
