@@ -5,26 +5,33 @@ services:
     image: container-registry.oracle.com/database/free:latest
     container_name: oracle-database
     ports:
-      - "1521:1521"
+      - "${DEMASY_DB_HOST_PORT}:1521"
       - "5500:5500"
+    env_file:
+      - .env
     environment:
-      - DATABASE_NAME=DEMASY
-      - ORACLE_PWD=Demasy1986
+      - DATABASE_NAME=${DEMASY_DB_NAME}
+      - ORACLE_PWD=${DEMASY_DB_PASS}
 
   restful-apis-service:
     build:
       context: ./
-    container_name: nodjs-apis
+      args:
+        - DEMASY_SERVER_PORT=${DEMASY_SERVER_PORT}
+    container_name: nodejs-apis
     ports:
-      - "3000:3000"
+      - "${DEMASY_SERVER_PORT}:${DEMASY_SERVER_PORT}"
     depends_on:
       - oracle-database-service
+    env_file:
+      - .env
     environment:
-      - DEMASY_DB_HOST=oracle-database
-      - DEMASY_DB_PORT=1521
-      - DEMASY_DB_SERVICE=FREE
-      - DEMASY_DB_USER=system
-      - DEMASY_DB_PASS=Demasy1986
+      - DEMASY_SERVER_PORT=${DEMASY_SERVER_PORT}
+      - DEMASY_DB_HOST=${DEMASY_DB_HOST}
+      - DEMASY_DB_PORT=${DEMASY_DB_PORT}
+      - DEMASY_DB_SERVICE=${DEMASY_DB_SERVICE}
+      - DEMASY_DB_USER=${DEMASY_DB_USER}
+      - DEMASY_DB_PASS=${DEMASY_DB_PASS}
 
 networks:
   default:
