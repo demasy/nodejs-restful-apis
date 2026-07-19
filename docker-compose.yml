@@ -18,7 +18,7 @@ services:
       context: ./
       args:
         - DEMASY_SERVER_PORT=${DEMASY_SERVER_PORT}
-    container_name: nodejs-apis
+    container_name: nodejs-restful-apis
     ports:
       - "${DEMASY_SERVER_PORT}:${DEMASY_SERVER_PORT}"
     depends_on:
