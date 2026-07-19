@@ -20,6 +20,7 @@ services:
       context: ./
       args:
         - DEMASY_SERVER_PORT=${DEMASY_SERVER_PORT}
+    image: oracle-nodejs-restful-apis:latest
     container_name: nodejs-restful-apis
     ports:
       - "${DEMASY_SERVER_PORT}:${DEMASY_SERVER_PORT}"
